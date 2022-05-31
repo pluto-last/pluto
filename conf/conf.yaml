@@ -1,0 +1,25 @@
+port: 7261
+db:
+  type: postgres
+  dsn: "host=127.0.0.1 user=pluto dbname=pluto sslmode=disable password=mEPHKA4QWc"
+  debug: true
+# mysql配置
+# type: mysql
+# dsn: "root:880206@tcp(127.0.0.1:3306)/tizi365?charset=utf8&parseTime=True&loc=Local&timeout=10s"
+cache:
+  addr: '127.0.0.1:6379'
+  password: 'Mcub1gCAp3'
+jwt:
+  timeout: 604800
+  signKey: '7fZjujwnf4K9eG52ncyzF9UE1dBsWGBFi2Z1'
+sms:
+  apiKey: dhashjkhjkhhjkhjkh
+  template: 【pluto-admin】您的验证码是%s。如非本人操作，请忽略本短信
+zap:
+  level: 'info'
+  format: 'console' #console or json
+  prefix:
+  director: 'log'
+  log-in-console: true
+excel-dir: true
+wsPath: 'http://192.168.1:7891/v1/vlient'

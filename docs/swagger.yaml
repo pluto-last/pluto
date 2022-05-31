@@ -1,0 +1,1298 @@
+definitions:
+  params.ChangeTaskStatus:
+    properties:
+      id:
+        type: string
+      status:
+        type: string
+    type: object
+  params.CreateCallTask:
+    properties:
+      callTask:
+        $ref: '#/definitions/table.CallTask'
+      taskSip:
+        items:
+          $ref: '#/definitions/table.TaskSip'
+        type: array
+    type: object
+  params.CreateRecharge:
+    properties:
+      amount:
+        description: 充值金额
+        type: integer
+      type:
+        description: 充值类型
+        type: string
+      userID:
+        description: 充值的用户 id
+        type: string
+    type: object
+  params.CreateScene:
+    properties:
+      scene:
+        $ref: '#/definitions/table.Scene'
+      sceneNode:
+        items:
+          $ref: '#/definitions/table.SceneNode'
+        type: array
+    type: object
+  params.GetCallTaskList:
+    properties:
+      limit:
+        type: integer
+      name:
+        description: 任务名称
+        type: string
+      offset:
+        type: integer
+      status:
+        description: 任务状态
+        type: string
+    type: object
+  params.GetMonthlyBillList:
+    properties:
+      date:
+        description: 时间
+        type: string
+      limit:
+        type: integer
+      mobile:
+        description: 用户手机号码
+        type: string
+      offset:
+        type: integer
+    type: object
+  params.GetRechargeList:
+    properties:
+      limit:
+        type: integer
+      mobile:
+        description: 用户电话
+        type: string
+      offset:
+        type: integer
+      type:
+        description: 充值类型
+        type: string
+    type: object
+  params.GetSceneList:
+    properties:
+      limit:
+        type: integer
+      name:
+        description: 名称
+        type: string
+      offset:
+        type: integer
+    type: object
+  params.GetSipList:
+    properties:
+      limit:
+        type: integer
+      mobile:
+        description: 线路显示号码
+        type: string
+      name:
+        description: 线路名称
+        type: string
+      offset:
+        type: integer
+    type: object
+  params.GetUserSipList:
+    properties:
+      limit:
+        type: integer
+      name:
+        description: 线路名称
+        type: string
+      offset:
+        type: integer
+      userID:
+        description: 用户ID
+        type: string
+    type: object
+  params.ImportCallPlanData:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/table.CallPlan'
+        type: array
+      isRemoveDup:
+        type: boolean
+    type: object
+  params.Login:
+    properties:
+      mobile:
+        description: 用户名
+        type: string
+      password:
+        description: 密码
+        type: string
+      source:
+        description: 来源
+        type: string
+    type: object
+  params.Register:
+    properties:
+      mobile:
+        type: string
+      password:
+        type: string
+      sms:
+        type: string
+    type: object
+  params.SMSReq:
+    properties:
+      captcha:
+        description: 验证码
+        type: string
+      captchaID:
+        description: 验证码ID
+        type: string
+      mobile:
+        type: string
+    type: object
+  params.SetSipInfo:
+    properties:
+      id:
+        description: sipID
+        type: string
+      intervalSec:
+        description: 呼叫间隔
+        type: integer
+      mobile:
+        description: 线路显示号码
+        type: string
+      name:
+        description: 线路名称
+        type: string
+      note:
+        description: 备注
+        type: string
+      sipIP:
+        description: 线路IP
+        type: string
+      sipPort:
+        description: 线路端口
+        type: string
+    type: object
+  params.SetUserInfo:
+    properties:
+      headerImg:
+        type: string
+      id:
+        description: 用户id
+        type: string
+      note:
+        type: string
+      status:
+        type: string
+      userName:
+        description: 用户名
+        type: string
+    type: object
+  params.SetUserSip:
+    properties:
+      concurrent:
+        description: 并发数
+        type: integer
+      expireAt:
+        description: 过期时间
+        type: string
+      id:
+        description: id
+        type: string
+      price:
+        description: 单价 每分钟
+        type: integer
+      sipID:
+        type: string
+      userID:
+        type: string
+    type: object
+  params.UserRolePermission:
+    properties:
+      permission:
+        type: string
+      role:
+        type: string
+      userID:
+        type: string
+    type: object
+  table.CallPlan:
+    properties:
+      callAt:
+        description: 拨打时间
+        type: string
+      callStatus:
+        description: 呼叫状态
+        type: string
+      cost:
+        description: 费用
+        type: integer
+      durationSec:
+        description: 时长(单位秒)
+        type: integer
+      global.UUID:
+        type: string
+      intentionTag:
+        description: 最终意向
+        type: string
+      isRead:
+        description: 是否已读
+        type: boolean
+      minute:
+        description: 计费分钟数
+        type: integer
+      mobile:
+        type: string
+      name:
+        type: string
+      note:
+        description: 通话备注
+        type: string
+      price:
+        description: 单价 每分钟
+        type: integer
+      rounds:
+        description: 通话回合数
+        type: integer
+      sceneID:
+        description: 话术ID
+        type: string
+      sipID:
+        description: 线路ID
+        type: string
+      status:
+        description: 任务状态
+        type: string
+      taskID:
+        description: 任务ID
+        type: string
+      userID:
+        type: string
+    type: object
+  table.CallTask:
+    properties:
+      describe:
+        description: 任务描述
+        type: string
+      executeEndTime:
+        description: 任务允许拨打的结束时间（存分钟数）
+        type: integer
+      executeStartTime:
+        description: 任务允许拨打的开始时间（存分钟数）
+        type: integer
+      global.UUID:
+        type: string
+      name:
+        description: 任务名称
+        type: string
+      sceneID:
+        description: 话术ID
+        type: string
+      sips:
+        items:
+          $ref: '#/definitions/table.TaskSip'
+        type: array
+      status:
+        description: 状态
+        type: string
+      userID:
+        type: string
+    type: object
+  table.Permission:
+    properties:
+      describe:
+        type: string
+      fullDescribe:
+        type: string
+      name:
+        type: string
+    type: object
+  table.Role:
+    properties:
+      describe:
+        type: string
+      fullDescribe:
+        type: string
+      name:
+        type: string
+    type: object
+  table.Scene:
+    properties:
+      describe:
+        description: 描述
+        type: string
+      global.UUID:
+        type: string
+      name:
+        description: 话术名称
+        type: string
+      sceneNode:
+        items:
+          $ref: '#/definitions/table.SceneNode'
+        type: array
+    type: object
+  table.SceneNode:
+    properties:
+      global.UUID:
+        type: string
+      name:
+        description: 节点名称
+        type: string
+      sceneID:
+        description: 话术ID
+        type: string
+      text:
+        description: 文字
+        type: string
+    type: object
+  table.Sip:
+    properties:
+      global.UUID:
+        type: string
+      intervalSec:
+        description: 呼叫间隔
+        type: integer
+      mobile:
+        description: 线路显示号码
+        type: string
+      name:
+        description: 线路名称
+        type: string
+      note:
+        description: 备注
+        type: string
+      sipIP:
+        description: 线路IP
+        type: string
+      sipPort:
+        description: 线路端口
+        type: string
+    type: object
+  table.TaskSip:
+    properties:
+      concurrent:
+        description: 并发数
+        type: integer
+      global.UUID:
+        type: string
+      taskID:
+        description: 任务ID
+        type: string
+      userID:
+        type: string
+      userSipID:
+        description: 用户线路ID
+        type: string
+      userSipInfo:
+        $ref: '#/definitions/table.UserSip'
+    type: object
+  table.UserSip:
+    properties:
+      concurrent:
+        description: 并发数
+        type: integer
+      expireAt:
+        description: 过期时间
+        type: string
+      global.UUID:
+        type: string
+      price:
+        description: 单价 每分钟
+        type: integer
+      sipID:
+        type: string
+      sipInfo:
+        $ref: '#/definitions/table.Sip'
+      userID:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: pluto 永远滴神!!!
+  title: Swagger pluto API
+  version: 1.0.0
+paths:
+  /base/captcha:
+    get:
+      parameters:
+      - description: 验证码ID
+        in: query
+        name: captchaID
+        required: true
+        type: string
+      produces:
+      - application/json
+      summary: 生成图形验证码
+      tags:
+      - Base
+  /base/sms:
+    post:
+      parameters:
+      - description: 电话，验证码，验证码ID
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/params.SMSReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":0,"data":{},"msg":"操作成功"}'
+          schema:
+            type: string
+      summary: 发送短信验证码
+      tags:
+      - Base
+  /bill/getMonthlyBillList:
+    get:
+      parameters:
+      - description: 获取用户月账单列表
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/params.GetMonthlyBillList'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 获取用户月账单列表
+      tags:
+      - Bill
+  /call/GetCallTaskByID:
+    get:
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 获取任务详情
+      tags:
+      - Call
+  /call/changeTaskStatus:
+    post:
+      parameters:
+      - description: 导入呼叫任务
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/params.ChangeTaskStatus'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 开始/暂停任务
+      tags:
+      - Call
+  /call/createCallTask:
+    post:
+      parameters:
+      - description: 创建呼叫推广任务
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/params.CreateCallTask'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 创建呼叫推广任务
+      tags:
+      - Call
+  /call/deleteCallTask:
+    delete:
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 删除任务
+      tags:
+      - Call
+  /call/getCallTaskList:
+    get:
+      parameters:
+      - description: 获取呼叫任务列表
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/params.GetCallTaskList'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 获取呼叫任务列表
+      tags:
+      - Call
+  /call/importCallPlan:
+    post:
+      parameters:
+      - description: 导入呼叫任务
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/params.ImportCallPlanData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 导入呼叫任务
+      tags:
+      - Call
+  /call/setCallTask:
+    put:
+      parameters:
+      - description: 编辑呼叫推广任务
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/params.CreateCallTask'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 编辑呼叫推广任务
+      tags:
+      - Call
+  /recharge/createRecharge:
+    post:
+      parameters:
+      - description: 管理员充值
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/params.CreateRecharge'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 管理员充值
+      tags:
+      - Recharge
+  /recharge/getRechargeList:
+    get:
+      parameters:
+      - description: 查询充值记录列表
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/params.GetRechargeList'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 查询充值记录列表
+      tags:
+      - Recharge
+  /roleAuth/addRolePermission:
+    post:
+      parameters:
+      - description: 角色添加权限
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/params.UserRolePermission'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 角色添加权限
+      tags:
+      - RoleAuth
+  /roleAuth/addUserRole:
+    post:
+      parameters:
+      - description: 角色添加权限
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/params.UserRolePermission'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 用户添加角色
+      tags:
+      - RoleAuth
+  /roleAuth/createPermission:
+    post:
+      parameters:
+      - description: 创建权限
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/table.Permission'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 创建权限
+      tags:
+      - RoleAuth
+  /roleAuth/createRole:
+    post:
+      parameters:
+      - description: 创建角色
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/table.Role'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 创建角色
+      tags:
+      - RoleAuth
+  /roleAuth/delRolePermission:
+    delete:
+      parameters:
+      - in: query
+        name: permission
+        type: string
+      - in: query
+        name: role
+        type: string
+      - in: query
+        name: userID
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 角色删除权限的
+      tags:
+      - RoleAuth
+  /roleAuth/delUserRole:
+    delete:
+      parameters:
+      - in: query
+        name: permission
+        type: string
+      - in: query
+        name: role
+        type: string
+      - in: query
+        name: userID
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 用户移除组
+      tags:
+      - RoleAuth
+  /roleAuth/deletePermission:
+    delete:
+      parameters:
+      - description: 删除权限
+        in: query
+        name: permissionName
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 删除权限
+      tags:
+      - RoleAuth
+  /roleAuth/deleteRole:
+    delete:
+      parameters:
+      - description: 删除角色信息
+        in: query
+        name: roleName
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 删除角色信息
+      tags:
+      - RoleAuth
+  /roleAuth/getPermissionList:
+    get:
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: name
+        type: string
+      - in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 查询所有权限
+      tags:
+      - RoleAuth
+  /roleAuth/getRoleList:
+    get:
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: name
+        type: string
+      - in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 分页获取角色列表
+      tags:
+      - RoleAuth
+  /roleAuth/getRolePermissions:
+    get:
+      parameters:
+      - description: 获取全部角色和权限的关联关系
+        in: query
+        name: role
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 获取全部角色和权限的关联关系
+      tags:
+      - RoleAuth
+  /roleAuth/getUserAllPermissions:
+    get:
+      parameters:
+      - description: 获取用户的所有权限
+        in: query
+        name: userID
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 获取用户的所有权限
+      tags:
+      - RoleAuth
+  /roleAuth/getUserRoles:
+    get:
+      parameters:
+      - description: 获取指定用户全部角色
+        in: query
+        name: userID
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 获取指定用户全部角色
+      tags:
+      - RoleAuth
+  /roleAuth/setPermission:
+    post:
+      parameters:
+      - description: 修改权限信息
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/table.Permission'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 修改权限信息
+      tags:
+      - RoleAuth
+  /roleAuth/setRole:
+    post:
+      parameters:
+      - description: 修改角色信息
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/table.Role'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 修改角色信息
+      tags:
+      - RoleAuth
+  /scene/createScene:
+    post:
+      parameters:
+      - description: 新增话术
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/params.CreateScene'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 新增话术
+      tags:
+      - Scene
+  /scene/getSceneInfoByID:
+    get:
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 查询话术节点详情详情
+      tags:
+      - Scene
+  /scene/getSceneList:
+    get:
+      parameters:
+      - description: 查询话术列表
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/params.GetSceneList'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 查询话术列表
+      tags:
+      - Scene
+  /scene/seleteScene:
+    delete:
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 删除话术
+      tags:
+      - Scene
+  /scene/setScene:
+    put:
+      parameters:
+      - description: 修改话术
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/table.Scene'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 修改话术
+      tags:
+      - Scene
+  /scene/setSceneNode:
+    put:
+      parameters:
+      - description: 新增话术
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/table.SceneNode'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 修改话术节点
+      tags:
+      - Scene
+  /sip/createSip:
+    post:
+      parameters:
+      - description: 创建线路
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/params.SetSipInfo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 创建线路
+      tags:
+      - Sip
+  /sip/deleteSip:
+    delete:
+      parameters:
+      - description: 线路id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 删除线路
+      tags:
+      - Sip
+  /sip/getSipList:
+    get:
+      parameters:
+      - description: 查询线路列表
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/params.GetSipList'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 查询线路列表
+      tags:
+      - Sip
+  /sip/getUserInfo:
+    get:
+      parameters:
+      - description: 线路id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 获取线路信息详情
+      tags:
+      - Sip
+  /sip/getUserSips:
+    get:
+      parameters:
+      - description: 查询线路列表
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/params.GetUserSipList'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 查询用户下已分配的线路
+      tags:
+      - Sip
+  /sip/setSipInfo:
+    put:
+      parameters:
+      - description: 设置线路信息
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/params.SetSipInfo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 设置线路信息
+      tags:
+      - Sip
+  /sip/setUserSip:
+    put:
+      parameters:
+      - description: 设置分配给用户线路信息
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/params.SetUserSip'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 设置分配给用户线路信息
+      tags:
+      - Sip
+  /sip/userAddSip:
+    post:
+      parameters:
+      - description: 给用户分配线路
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/params.SetUserSip'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 给用户分配线路
+      tags:
+      - Sip
+  /sip/userDelSip:
+    delete:
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 删除用户下的线路
+      tags:
+      - Sip
+  /user/batchCreateUser:
+    post:
+      parameters:
+      - description: 数量
+        in: query
+        name: count
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 管理员批量生成用户
+      tags:
+      - User
+  /user/deleteUser:
+    delete:
+      parameters:
+      - description: 用户id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 删除用户
+      tags:
+      - User
+  /user/getUserInfo:
+    get:
+      parameters:
+      - description: 用户id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 获取用户信息详情
+      tags:
+      - User
+  /user/getUserList:
+    get:
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - description: 手机号码
+        in: query
+        name: mobile
+        type: string
+      - in: query
+        name: offset
+        type: integer
+      - description: 用户名
+        in: query
+        name: userName
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 分页获取用户列表
+      tags:
+      - User
+  /user/login:
+    post:
+      parameters:
+      - description: 用户名, 密码
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/params.Login'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 用户登录
+      tags:
+      - User
+  /user/register:
+    post:
+      parameters:
+      - description: 手机号码，密码，短信验证码
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/params.Register'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 用户注册
+      tags:
+      - User
+  /user/resetPassword:
+    post:
+      parameters:
+      - description: 手机号码，密码，短信验证码
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/params.Register'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 修改密码
+      tags:
+      - User
+  /user/resetPasswordByID:
+    post:
+      parameters:
+      - description: userID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 管理员重置密码
+      tags:
+      - User
+  /user/setUserInfo:
+    put:
+      parameters:
+      - description: 修改用户信息
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/params.SetUserInfo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 修改用户信息
+      tags:
+      - User
+  /ws/client:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 机器人建立websocket连接
+      tags:
+      - WSClient
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: token
+    type: apiKey
+swagger: "2.0"
