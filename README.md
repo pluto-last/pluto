@@ -9,7 +9,9 @@
 
 * 基于 Zap 的日志管理模块
 
-* JWT 认证
+* JWT 认证，支持第三方接入认证，鉴权
+
+* 支持 Websocket 消息通知
 
 * 支持 Redis，Kafka
 
